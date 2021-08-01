@@ -1,38 +1,13 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+  background-image: url(D:\REACT\weather\src\images\image-1.jpg);
+  background-repeat: no-repeat;
+  background-size:   cover;
+  
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#container{
+  background-image: url("https://pixabay.com/get/g7e5781b84bc87fe486ff7f4ef62d8ec8888d7be976c1cc04cba16c28d4b5255c057622b74fcb4b5f995cbb906de8c6e7.png");
+  background-repeat: no-repeat;
+  background-size:   cover;
 }
