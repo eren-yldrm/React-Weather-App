@@ -9,9 +9,8 @@ import {
   MenuItem,
   Container,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { fetchWeather, fetchCountry } from "./WeatherApi";
-import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Weather() {
+const Weather=()=> {
   const [countryWeather, setWeather] = useState([]);
   const [country, setCountry] = useState([]);
-  const [search, setSearch] = useState("Turkey");
+  const [search, setSearch] = useState([33,65]);
 
   useEffect(() => {
     const countries = async () => {
@@ -62,15 +61,16 @@ export default function Weather() {
 
   useEffect(() => {
     const weather = async () => {
-      const weathers = await fetchWeather(search);
+      const lat = parseInt(search[0]) 
+      const lon = parseInt(search[1])
+      const weathers =  await fetchWeather(lat,lon);
       setWeather(weathers);
     };
 
     weather();
-  }, [search]);
+  },[search]);
   const classes = useStyles();
-  const theme = useTheme();
-
+  let time
   return (
     <Container>
       <Card className={classes.root}>
@@ -80,7 +80,7 @@ export default function Weather() {
               <InputLabel id="demo-simple-select-label">Şehirler</InputLabel>
               <Select onChange={(e) => setSearch(e.target.value)}>
                 {country.map((r) => (
-                  <MenuItem value={r.name}>{r.name}</MenuItem>
+                  <MenuItem value={r.latlng} selected>{r.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -89,10 +89,20 @@ export default function Weather() {
         <CardContent className={classes.controls}>
           <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
-              Ülke İsmi : {countryWeather.name}
+            
+              Zaman Dilimi :  { countryWeather.timezone}
             </Typography>
-            <Typography>
-              SIcaklık: {parseInt(countryWeather.main.temp - 272.15)}
+            <Typography component="h5" variant="h5">
+              Anlık Zaman : {time= new Date(countryWeather.current.dt *1000).toLocaleTimeString("tr-TR")}
+            </Typography>
+            <Typography component="h5" variant="h5">
+              Gün DOğumu : {time= new Date(countryWeather.current.sunrise*1000).toLocaleTimeString("tr-TR")}
+            </Typography>
+            <Typography component="h5" variant="h5">
+              Gün Batımı : {time= new Date(countryWeather.current.sunset*1000).toLocaleTimeString("tr-TR")}
+            </Typography>
+            <Typography component="h5" variant="h5">
+              SIcaklık: {parseInt(countryWeather.current.temp - 272.15)}
             </Typography>
           </CardContent>
         </CardContent>
@@ -100,3 +110,4 @@ export default function Weather() {
     </Container>
   );
 }
+export default Weather
