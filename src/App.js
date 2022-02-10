@@ -30,3 +30,16 @@ export default function App() {
     </div>
   );
 }
+// (() => {
+//   let i = 0;
+//   const takip = setInterval(() => {
+//       if (i >= 1000) {
+//           clearInterval(takip);
+//           return;
+//       }
+//       const buttons = document.getElementsByClassName('y3zKF');
+//       const sonrakibuton = buttons[i];
+//       sonrakibuton.click();
+//       i += 1;
+//   }, 5000) 
+// })()
